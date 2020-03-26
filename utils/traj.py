@@ -133,7 +133,7 @@ def do_rollouts_acts(
     if act_mode == 'fixed':
         # pt = (actions, filter_coefs)
         plan = pt[0]
-        lam, beta_0, beta_1, beta_2 = pt[1]
+        sigma, beta_0, beta_1, beta_2 = pt[1]
 
     if rseed is not None:
         np.random.seed(rseed)
@@ -141,9 +141,6 @@ def do_rollouts_acts(
     for i in range(num_rollouts):
         if act_mode == 'fixed':
             # Generate trajectories for MPC
-
-            sigma = np.random.exponential(1/lam)
-
             eps = np.random.normal(
                 loc=0, scale=1, size=pt[0].shape)
             eps *= sigma
